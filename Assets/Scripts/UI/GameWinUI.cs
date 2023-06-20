@@ -18,11 +18,18 @@ public class GameWinUI : MonoBehaviour {
     private void KitchenGameManager_OnStateChanged(object sender, System.EventArgs e) {
         if (KitchenGameManager.Instance.IsGameWin()) {
             Show();
+            StartCoroutine(ReturnToMainMenuAfterDelay(5f));
 
             //recipesDeliveredText.text = DeliveryManager.Instance.GetSuccessfulRecipesAmount().ToString();
         } else {
             Hide();
         }
+    }
+
+    private IEnumerator ReturnToMainMenuAfterDelay(float delay) {
+    yield return new WaitForSeconds(delay);
+
+    Loader.Load(Loader.Scene.MainMenuScene);
     }
 
     private void Show() {
